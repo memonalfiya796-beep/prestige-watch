@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Product</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="css/style.css"></head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="brand">Prestige Watches</div>
+      <nav><a href="index.html">Home</a><a href="brands.html">Brands</a><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section" id="product-detail"></section>
+  </main>
+
+  <footer class="footer"><div class="container"><div>© Prestige Watches</div><div>+91-98765-43210</div></div></footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function q(name){ return new URLSearchParams(location.search).get(name); }
+    const id = q('id') || 'demo-1';
+    const name = q('name') ? decodeURIComponent(q('name')) : 'Demo Watch';
+    const price = q('price') ? Number(q('price')) : 1999;
+    const img = q('img') ? decodeURIComponent(q('img')) : 'https://via.placeholder.com/400x250?text=Watch';
+
+    const container = document.getElementById('product-detail');
+    container.innerHTML = `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:18px;">
+        <div>
+          <img src="${img}" style="width:100%; border-radius:12px;">
+        </div>
+        <div>
+          <h1>${name}</h1>
+          <p style="color:var(--muted)">SKU: ${id}</p>
+          <h2 style="margin-top:8px">₹${price}</h2>
+          <p>High quality watch with 1-year warranty. Free shipping & easy returns.</p>
+          <div style="margin:18px 0">
+            <label>Quantity</label>
+            <input id="qty" type="number" value="1" min="1" style="width:80px; margin-left:8px">
+          </div>
+          <button class="btn" onclick="addProduct()">Add to Cart</button>
+          <a class="btn" href="cart.html" style="margin-left:12px; background:#0f1724">Go to Cart</a>
+        </div>
+      </div>
+    `;
+    function addProduct(){
+      const qty = Number(document.getElementById('qty').value || 1);
+      addToCartFromPage({ id, name, price, image: img, qty });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Order Success</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="css/style.css"></head>
+<body>
+  <header class="header"><div class="container"><div class="brand">Prestige Watches</div><nav><a href="index.html">Home</a><a href="brands.html">Brands</a><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></nav></div></header>
+
+  <main class="container" style="padding-top:40px">
+    <section class="section">
+      <h2>Thank you — Your order is placed</h2>
+      <p id="order-info">We have received your order. Order ID: <strong id="order-id"></strong></p>
+      <a class="btn" href="index.html">Continue Shopping</a>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const orderId = params.get('order') || '';
+    document.getElementById('order-id').innerText = orderId;
+  </script>
+</body>
+</html>

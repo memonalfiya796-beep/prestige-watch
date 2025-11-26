@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Brand Collection</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="css/style.css"></head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="brand">Prestige Watches</div>
+      <nav><a href="index.html">Home</a><a href="brands.html">Brands</a><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2 id="brand-title">Brand Collection</h2>
+      <div id="products" class="card-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><div>© Prestige Watches</div><div>+91-98765-43210</div></div></footer>
+  <script src="js/main.js"></script>
+  <script>
+    const catalog = {
+      "Brand A": [
+        {id:'a-chrono', name:'A Chrono', price:10999, image:'https://via.placeholder.com/400x250?text=A+Chrono'},
+        {id:'a-gold', name:'A Gold', price:14999, image:'https://via.placeholder.com/400x250?text=A+Gold'}
+      ],
+      "Brand B": [
+        {id:'b-sport', name:'B Sport Pro', price:7999, image:'https://via.placeholder.com/400x250?text=B+Sport'},
+        {id:'b-smart', name:'B Smart', price:12999, image:'https://via.placeholder.com/400x250?text=B+Smart'}
+      ],
+      "Brand C": [
+        {id:'c-elegant', name:'C Elegant', price:4999, image:'https://via.placeholder.com/400x250?text=C+Elegant'},
+        {id:'c-classic', name:'C Classic', price:5999, image:'https://via.placeholder.com/400x250?text=C+Classic'}
+      ]
+    };
+
+    function q(name){ return new URLSearchParams(location.search).get(name); }
+    const brand = q('brand') || 'Brand A';
+    document.getElementById('brand-title').innerText = brand + ' Collection';
+    const productsEl = document.getElementById('products');
+    const products = catalog[brand] || [];
+    products.forEach(p=>{
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `<img src="${p.image}"><h3>${p.name}</h3><p>From ${p.id}</p>
+        <div class="row"><div class="price">₹${p.price}</div><a class="btn" href="product.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}&img=${encodeURIComponent(p.image)}">View</a></div>`;
+      productsEl.appendChild(div);
+    });
+  </script>
+</body>
+</html>
